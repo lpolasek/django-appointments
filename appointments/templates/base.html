@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+	<title>{% block title %}{% endblock %}</title>
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}style.css" />
+
+</head>
+<body>
+	<table border=0>
+		<tr>
+			<!-- Navigation bar-->
+			<td width="20%">
+				<a href="{% url doctor %}">Doctors</a><p>
+				<a href="{% url appointment %}">Appointments</a><p>
+			</td>
+
+			<td>
+			<div class="main_content">
+				<h1>{% block heading %}{% endblock %}</h1>
+				<div class="specific_content">
+					{% block content %}{% endblock %}
+				</div>
+				<table class="items_table">
+					<tr class="items_header">
+					{% block table_header %}{% endblock %}
+					</tr>
+					{% for item in items %}
+						<tr class="items_item">
+						{% block table_row %}{% endblock %}
+						</tr>
+					{% endfor %}
+				<table>
+				</td>
+			</div>
+		</tr>
+	<table>
+</body>
+</html>
