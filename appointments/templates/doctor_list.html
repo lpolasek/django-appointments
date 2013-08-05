@@ -22,10 +22,8 @@
 {% block table_header %}<td colspan=4>Doctor Name</td>{% endblock %}
 
 {% block table_row %}
-{% load static %}
-{% get_static_prefix as STATIC_PREFIX %}
 <td>{{ item.name }}</td>
-<td class="icon_column"><a href="{% url appointments_for_doctor item.id %}"><img src="{{ STATIC_PREFIX }}icon_calendar.gif"></a></td>
-<td class="icon_column"><a href="{% url doctor_edit item.id %}"><img src="{{ STATIC_PREFIX }}icon_changelink.gif"></a></td>
-<td class="icon_column"><a href="{% url doctor_delete item.id %}"><img src="{{ STATIC_PREFIX }}icon_deletelink.gif"></a></td>
+<td class="icon_column"><a href="{% url appointments_for_doctor item.id %}"><img src="{{ STATIC_URL }}img/icon_calendar.gif"></a></td>
+<td class="icon_column"><a href="{% url doctor_edit item.id %}"><img src="{{ STATIC_URL }}img/icon_changelink.gif"></a></td>
+<td class="icon_column"><a href="{% url doctor_delete item.id %}"><img src="{{ STATIC_URL }}img/icon_deletelink.gif"></a></td>
 {% endblock %}

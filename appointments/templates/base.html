@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
 	<title>{% block title %}{% endblock %}</title>
-{% load static %}
-{% get_static_prefix as STATIC_PREFIX %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}style.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css" />
 
 </head>
 <body>

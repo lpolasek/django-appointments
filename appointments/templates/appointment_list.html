@@ -37,11 +37,9 @@
 {% block table_header %}<td>Patient Name</td><td>Time</td><td colspan=3>Doctor</td>{% endblock %}
 
 {% block table_row %}
-{% load static %}
-{% get_static_prefix as STATIC_PREFIX %}
 <td>{{ item.patient_name }}</td>
 <td>{{ item.time|date:"Y-m-d H:i" }}</td>
 <td>{{ item.doctor.name }}</td>
-<td class="icon_column"><a href="{% url appointment_edit item.id %}"><img src="{{ STATIC_PREFIX }}icon_changelink.gif"></a></td>
-<td class="icon_column"><a href="{% url appointment_delete item.id %}"><img src="{{ STATIC_PREFIX }}icon_deletelink.gif"></a></td>
+<td class="icon_column"><a href="{% url appointment_edit item.id %}"><img src="{{ STATIC_URL }}img/icon_changelink.gif"></a></td>
+<td class="icon_column"><a href="{% url appointment_delete item.id %}"><img src="{{ STATIC_URL }}img/icon_deletelink.gif"></a></td>
 {% endblock %}
