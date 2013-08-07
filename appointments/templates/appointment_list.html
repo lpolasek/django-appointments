@@ -1,45 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Appointment{% endblock %}</title>
+{% block title %}Appointment{% endblock %}
 
-{% block heading %}Appointments{% endblock %}</title>
+{% block appointment_active %}class="active"{% endblock %}
 
-{% block content %}
-		{% if form %}
-			<div class='form'>
-				<form action="{{ action }}" method='post'>
-					{% csrf_token %}
-					<input type="hidden" name="id" value="{{ model_id }}" />
+{% block heading %}Appointments{% endblock %}
 
-					{{ form.patient_name.errors }}
-					<label for="id_message">Patient Name:</label>
-					{{ form.patient_name }}
-					</p>
+{% block cancel_action %}{% url appointment %}{% endblock %}
 
-					{{ form.time.errors }}
-					<label for="id_message">Time (YYYY-MM-DD HH):</label>
-					{{ form.time }}
-					</p>
-
-					{{ form.doctor.errors }}
-					<label for="id_message">Doctor:</label>
-					{{ form.doctor }}
-
-					<input type='submit' value='{{ button_label }}'>
-
-				</form>
-			</div>
-		{% else %}
-			<div class="title">{{ title }}</div>
-		{% endif %}
+{% block table_header %}
+<td><strong>Patient Name</strong></td>
+<td><strong>Time</strong></td>
+<td colspan=4><strong>Doctor</strong></td>
 {% endblock %}
-
-{% block table_header %}<td>Patient Name</td><td>Time</td><td colspan=3>Doctor</td>{% endblock %}
 
 {% block table_row %}
 <td>{{ item.patient_name }}</td>
 <td>{{ item.time|date:"Y-m-d H:i" }}</td>
 <td>{{ item.doctor.name }}</td>
-<td class="icon_column"><a href="{% url appointment_edit item.id %}"><img src="{{ STATIC_URL }}img/icon_changelink.gif"></a></td>
-<td class="icon_column"><a href="{% url appointment_delete item.id %}"><img src="{{ STATIC_URL }}img/icon_deletelink.gif"></a></td>
+<td align="right">
+	<a href="{% url appointment_edit item.id %}"><img src="{{ STATIC_URL }}img/icon_changelink.gif"></a>
+	<a href="{% url appointment_delete item.id %}"><img src="{{ STATIC_URL }}img/icon_deletelink.gif"></a>
+</td>
 {% endblock %}

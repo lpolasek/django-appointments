@@ -1,29 +1,20 @@
 {% extends "base.html" %}
 
-{% block title %}Doctors{% endblock %}</title>
+{% block title %}Doctors{% endblock %}
 
-{% block heading %}Doctors{% endblock %}</title>
+{% block doctor_active %}class="active"{% endblock %}
 
-{% block content %}
-		<div class='form'>
-			<form action="{{ action }}" method='post'>
-				{% csrf_token %}
-				<input type="hidden" name="id" value="{{ model_id }}" />
-				
+{% block heading %}Doctors{% endblock %}
 
-					{{ form.name.errors }}
-					<label for="id_message">Doctor Name:</label>
-					{{ form.name }}
-					<input type='submit' value='{{ button_label }}'>
-			</form>
-		</div>
-{% endblock %}
+{% block cancel_action %}{% url doctor %}{% endblock %}
 
-{% block table_header %}<td colspan=4>Doctor Name</td>{% endblock %}
+{% block table_header %}<td colspan=2><strong>Doctor Name</strong></td>{% endblock %}
 
 {% block table_row %}
 <td>{{ item.name }}</td>
-<td class="icon_column"><a href="{% url appointments_for_doctor item.id %}"><img src="{{ STATIC_URL }}img/icon_calendar.gif"></a></td>
-<td class="icon_column"><a href="{% url doctor_edit item.id %}"><img src="{{ STATIC_URL }}img/icon_changelink.gif"></a></td>
-<td class="icon_column"><a href="{% url doctor_delete item.id %}"><img src="{{ STATIC_URL }}img/icon_deletelink.gif"></a></td>
+<td align="right">
+	<a href="{% url appointments_for_doctor item.id %}"><img src="{{ STATIC_URL }}img/icon_calendar.gif"></a>
+	<a href="{% url doctor_edit item.id %}"><img src="{{ STATIC_URL }}img/icon_changelink.gif"></a>
+	<a href="{% url doctor_delete item.id %}"><img src="{{ STATIC_URL }}img/icon_deletelink.gif"></a>
+</td>
 {% endblock %}

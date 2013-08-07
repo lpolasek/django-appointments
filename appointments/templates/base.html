@@ -2,37 +2,53 @@
 <html lang="en">
 <head>
 	<title>{% block title %}{% endblock %}</title>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css" /> 
 
 </head>
 <body>
-	<table border=0>
-		<tr>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
 			<!-- Navigation bar-->
-			<td width="20%">
-				<a href="{% url doctor %}">Doctors</a><p>
-				<a href="{% url appointment %}">Appointments</a><p>
-			</td>
+			<div class="navbar">
+				<ul class="nav navbar-nav">
+					
+					<li {% block appointment_active %}{% endblock %}><a href="{% url appointment %}">Appointments</a></li>
+					<li {% block doctor_active %}{% endblock %}><a href="{% url doctor %}">Doctors</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
-			<td>
-			<div class="main_content">
+	<div class="row">
+			<div class="col-lg-2"></div>
+
+			<div class="col-lg-8">
 				<h1>{% block heading %}{% endblock %}</h1>
-				<div class="specific_content">
-					{% block content %}{% endblock %}
-				</div>
-				<table class="items_table">
-					<tr class="items_header">
+				{% if form %}
+					<form action="{{ action }}" method='post'>
+						{% csrf_token %}
+						{% load crispy_forms_tags %}
+						{{ form|crispy }}
+						<button type='submit' class="btn btn-default">{{ button_label }}</button>
+						<a class="btn btn-default" href="{% block cancel_action %}{% endblock %}">Cancel</a>
+					</form>
+				{% else %}
+					{{ title }}
+				{% endif %}
+				<p>
+				<table class="table table-striped table-condensed">
+					<tr class="success">
 					{% block table_header %}{% endblock %}
 					</tr>
 					{% for item in items %}
-						<tr class="items_item">
+						<tr>
 						{% block table_row %}{% endblock %}
 						</tr>
 					{% endfor %}
 				<table>
-				</td>
 			</div>
-		</tr>
-	<table>
+			<div class="col-lg-2"></div>
+	</div>
 </body>
 </html>
